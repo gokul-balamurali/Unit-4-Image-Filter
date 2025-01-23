@@ -1,0 +1,62 @@
+from PIL import Image
+import os
+
+# Deletes old created images if they exist
+if os.path.exists("newImage.jpg"):
+    os.remove("newImage.jpg")
+
+# Prints two blank lines to start our program output
+print("\n\n")
+
+# Opens image - Local File in repl.it
+img = Image.open('newpic.jpg')
+
+# Rescale image size down, if needed
+width = img.width
+height = img.height
+mwidth = width // 1000
+mheight = height // 1000
+if mwidth > mheight:
+    scale = mwidth
+else:
+    scale = mheight
+if scale != 0:
+    img = img.resize((width // scale, height // scale))
+from PIL import Image, ImageFilter
+import os
+
+if os.path.exists("newImage.jpg"):
+    os.remove("newImage.jpg")
+
+print("\n\n")
+
+# Opens image - Local File in repl.it
+img = Image.open('image.jpg')
+
+# Rescale image size down, if needed
+width = img.width
+height = img.height
+mwidth = width // 1000
+mheight = height // 1000
+if mwidth > mheight:
+    scale = mwidth
+else:
+    scale = mheight
+if scale != 0:
+    img = img.resize((width // scale, height // scale))
+
+########################
+#        Watercolor Effect       #
+########################
+
+blurred_img = img.filter(ImageFilter.GaussianBlur(radius=5))
+
+enhanced_img = blurred_img.filter(ImageFilter.EDGE_ENHANCE)
+
+final_img = enhanced_img.filter(ImageFilter.SMOOTH_MORE)
+
+final_img.save("newImage.jpg")
+
+final_img.show()
+
+print("The new image has been saved as 'newImage.jpg' with a watercolor filter applied.")
